@@ -43,10 +43,9 @@ export function EditorScreen({ onFinish }: EditorScreenProps) {
     <div className="screen editor-screen">
       <div className="editor-header">
         <h1 className="app-title-sm">8-BITS</h1>
-        <div className="editor-top-controls">
-          <PlayPauseButton isPlaying={isPlaying} onToggle={toggle} />
-          <ClearButton onClear={clearGrid} />
-        </div>
+        <PixelButton variant="primary" size="md" className="finish-btn-top" onClick={handleFinish}>
+          SHARE ▶
+        </PixelButton>
       </div>
 
       <div className="editor-grid-wrapper">
@@ -63,9 +62,10 @@ export function EditorScreen({ onFinish }: EditorScreenProps) {
           <WaveformPicker value={waveform} onChange={setWaveform} />
         </div>
         <PresetPicker onSelect={handlePresetSelect} />
-        <PixelButton variant="primary" size="lg" className="finish-btn" onClick={handleFinish}>
-          FINISH ▶
-        </PixelButton>
+        <div className="editor-bottom-controls">
+          <PlayPauseButton isPlaying={isPlaying} onToggle={toggle} />
+          <ClearButton onClear={clearGrid} />
+        </div>
       </div>
     </div>
   )

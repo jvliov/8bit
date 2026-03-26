@@ -171,8 +171,17 @@ body {
   gap: 12px;
 }
 
-.finish-btn {
-  width: 100%;
+.finish-btn-top {
+  /* SHARE button lives in the header, sized to match the other header buttons */
+}
+
+.editor-bottom-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.editor-bottom-controls > * {
+  flex: 1;
 }
 
 /* ─── Finish Screen ─── */
