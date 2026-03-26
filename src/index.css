@@ -58,8 +58,8 @@ body {
 
 /* ─── App Layout ─── */
 .app {
-  height: 100dvh;
-  height: 100vh; /* fallback */
+  height: 100vh;    /* fallback for browsers without dvh support */
+  height: 100dvh;   /* dynamic viewport — shrinks when Safari toolbar is visible */
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -79,7 +79,7 @@ body {
 .demo-screen {
   align-items: center;
   justify-content: space-between;
-  padding: 20px 16px;
+  padding: 20px 16px calc(20px + env(safe-area-inset-bottom, 0px));
   gap: 16px;
 }
 
@@ -123,8 +123,10 @@ body {
 
 /* ─── Editor Screen ─── */
 .editor-screen {
-  padding: 16px 12px 14px;
-  gap: 12px;
+  /* bottom padding grows by the safe-area-inset so content clears the iPhone
+     home bar and Safari's bottom toolbar on notched devices */
+  padding: 12px 12px calc(12px + env(safe-area-inset-bottom, 0px));
+  gap: 8px;
 }
 
 .editor-header {
@@ -132,7 +134,7 @@ body {
   align-items: center;
   justify-content: space-between;
   flex-shrink: 0;
-  padding: 8px 0;
+  padding: 4px 0;
 }
 
 .app-title-sm {
@@ -158,7 +160,7 @@ body {
 .editor-bottom {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   flex-shrink: 0;
 }
 
@@ -177,7 +179,7 @@ body {
 .finish-screen {
   align-items: center;
   justify-content: center;
-  padding: 24px 16px;
+  padding: 24px 16px calc(24px + env(safe-area-inset-bottom, 0px));
   gap: 32px;
 }
 
