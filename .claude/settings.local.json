@@ -4,7 +4,9 @@
       "Bash(rm -f /Users/juliovaldes/projects/8bit/src/App.tsx /Users/juliovaldes/projects/8bit/src/App.css /Users/juliovaldes/projects/8bit/src/index.css /Users/juliovaldes/projects/8bit/src/assets/react.svg)",
       "Bash(mkdir -p /Users/juliovaldes/projects/8bit/src/audio /Users/juliovaldes/projects/8bit/src/data /Users/juliovaldes/projects/8bit/src/hooks /Users/juliovaldes/projects/8bit/src/components/screens /Users/juliovaldes/projects/8bit/src/components/grid /Users/juliovaldes/projects/8bit/src/components/controls /Users/juliovaldes/projects/8bit/src/components/ui /Users/juliovaldes/projects/8bit/src/utils)",
       "mcp__Claude_Preview__preview_start",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(grep -E \"\\\\.\\(ts|tsx|json\\)$\")",
+      "Bash(find /Users/juliovaldes/projects/8bit/src -type f -name *.tsx -o -name *.ts -o -name *.json -o -name *.css)"
     ]
   }
 }

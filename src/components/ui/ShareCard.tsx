@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { PixelButton } from './PixelButton'
-import { exportWav, downloadBlob } from '../../utils/wavEncoder'
+import { encodeShareUrl } from '../../utils/shareUrl'
 import type { Grid } from '../../hooks/useGrid'
 import type { Waveform } from '../../audio/frequencies'
 
@@ -12,18 +12,25 @@ interface ShareCardProps {
 }
 
 export function ShareCard({ grid, bpm, waveform, onEditAgain }: ShareCardProps) {
-  const [isExporting, setIsExporting] = useState(false)
+  const [copied, setCopied] = useState(false)
 
-  const handleDownload = async () => {
-    setIsExporting(true)
+  const handleShare = async () => {
+    const url = encodeShareUrl(grid, bpm, waveform)
     try {
-      const blob = await exportWav(grid, bpm, waveform)
-      downloadBlob(blob, '8bit-loop.wav')
-    } catch (err) {
-      console.error('Export failed:', err)
-    } finally {
-      setIsExporting(false)
+      await navigator.clipboard.writeText(url)
+    } catch {
+      // Fallback for browsers that block clipboard without HTTPS or permissions
+      const input = document.createElement('input')
+      input.value = url
+      input.style.position = 'fixed'
+      input.style.opacity = '0'
+      document.body.appendChild(input)
+      input.select()
+      document.execCommand('copy')
+      document.body.removeChild(input)
     }
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2500)
   }
 
   return (
@@ -37,8 +44,8 @@ export function ShareCard({ grid, bpm, waveform, onEditAgain }: ShareCardProps) 
         <span>{countNotes(grid)} NOTES</span>
       </div>
       <div className="share-card__actions">
-        <PixelButton variant="primary" size="lg" onClick={handleDownload} disabled={isExporting}>
-          {isExporting ? 'EXPORTING...' : '⬇ DOWNLOAD WAV'}
+        <PixelButton variant="primary" size="lg" onClick={handleShare}>
+          {copied ? '✓ COPIED!' : '⬆ SHARE LINK'}
         </PixelButton>
         <PixelButton variant="secondary" onClick={onEditAgain}>
           ← EDIT AGAIN
